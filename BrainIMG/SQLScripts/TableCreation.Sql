@@ -1,0 +1,14 @@
+﻿CREATE TABLE TestRecord (
+    ID INT PRIMARY KEY IDENTITY (1, 1),
+    FolderPath NVARCHAR (260) NOT NULL,
+    TestDate DATETIME NOT NULL,
+    Metadata NVARCHAR(MAX)
+);
+
+CREATE TABLE TestResult (
+    ID INT PRIMARY KEY IDENTITY (1, 1),
+    FolderPath NVARCHAR (260) NOT NULL,
+    TestDate DATETIME NOT NULL,
+    Metadata NVARCHAR(MAX)
+);
+
