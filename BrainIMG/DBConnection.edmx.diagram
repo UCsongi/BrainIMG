@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="477f6b2df03b498cb8c069575b023686" Name="Diagram1" />
+      <Diagram DiagramId="477f6b2df03b498cb8c069575b023686" Name="Diagram1" >
+        <EntityTypeShape EntityType="BrainVisualModel.TestRecord" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BrainVisualModel.TestResult" Width="1.5" PointX="2.75" PointY="0.75" />
+        <AssociationConnector Association="BrainVisualModel.FK__TestResul__Recor__3E52440B" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

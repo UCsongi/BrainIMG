@@ -65,6 +65,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DisplayWindow.xaml.cs">
+      <DependentUpon>DisplayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestRecord.cs">
+      <DependentUpon>DBConnection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestResult.cs">
+      <DependentUpon>DBConnection.tt</DependentUpon>
+    </Compile>
+    <Page Include="DisplayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

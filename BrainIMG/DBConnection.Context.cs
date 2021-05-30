@@ -25,5 +25,7 @@ namespace BrainIMG
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TestRecord> TestRecords { get; set; }
+        public virtual DbSet<TestResult> TestResults { get; set; }
     }
 }

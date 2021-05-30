@@ -1,37 +1,79 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 
 namespace BrainIMG
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        #region Variables
+        private int recordID = -1;
+        private string folderPath = string.Empty;
+        #endregion Variables
+        #region Properties
+        /// <summary>
+        /// The ID of the test record
+        /// </summary>
+        private int RecordID
+        {
+            get => recordID;
+
+            set
+            {
+                recordID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// The ID of the test record
+        /// </summary>
+        private string FolderPath
+        {
+            get => folderPath;
+
+            set
+            {
+                folderPath = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion Properties
+
+        #region Constructor
+        /// <summary>
+        /// Initializes the window
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
+        #endregion Constructor
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        #region Methods
+        #region EventHandlers
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
-            dlg.InitialDirectory = "c:\\";
-            dlg.Filter = "Image files (*.jpg)|*.jpg|All Files (*.*)|*.*";
-            dlg.RestoreDirectory = true;
 
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string selectedFileName = dlg.FileName;
-                FileNameLabel.Content = selectedFileName;
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(selectedFileName);
-                bitmap.EndInit();
-                ImageViewer1.Source = bitmap;
-            }
         }
-    }
+
+        /// <summary>
+        /// Invokes the property changed event
+        /// </summary>
+        /// <param name="name">the name of the sender calling it</param>
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion EventHandlers
+        #endregion Methods
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion Events
+    };
 }
