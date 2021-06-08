@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -58,7 +59,13 @@ namespace BrainIMG
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            string connetionString;
+            SqlConnection cnn;
+            connetionString = @"Data Source=DESKTOP-8HOCTVE;Initial Catalog=BrainVisual;User ID=admin;Password=DummyPassword123";
+            cnn = new SqlConnection(connetionString);
+            cnn.Open();
+            MessageBox.Show("Connection Open  !");
+            cnn.Close();
         }
 
         /// <summary>
