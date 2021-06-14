@@ -1,7 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using BrainIMG;
 
 namespace BrainIMG
 {
@@ -42,6 +46,9 @@ namespace BrainIMG
                 OnPropertyChanged();
             }
         }
+
+        private TestRecord ImportedRecord
+        { get; set; } = new TestRecord() { TestDate = System.DateTime.Now};
         #endregion Properties
 
         #region Constructor
@@ -59,14 +66,41 @@ namespace BrainIMG
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=DESKTOP-8HOCTVE;Initial Catalog=BrainVisual;User ID=admin;Password=DummyPassword123";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            MessageBox.Show("Connection Open  !");
-            cnn.Close();
+            using (var context = new BrainVisualEntities())
+            {
+                string filePath = "eval.csv";
+                ImportedRecord.FolderPath = filePath;
+                ImportedRecord.Metadata = "First import.";
+                ImportedRecord.TestResults = new List<TestResult>();
+                context.TestRecords.Add(ImportedRecord);
+                context.SaveChanges();
+                if (File.Exists(filePath))
+                {
+                    StreamReader reader = new StreamReader(File.OpenRead(filePath));
+                    List<string> listA = new List<string>();
+
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        TestResult ImportedResult = new TestResult();
+                        ImportedResult.RecordID = ImportedRecord.ID;
+
+                        context.TestResults.Add(ImportedResult);
+                        context.SaveChanges();
+
+                        ImportedResult.Value3 = values[0];
+
+                        int.TryParse(values[2], out int temp);
+                        ImportedResult.Value2 = temp;
+                        ImportedResult.Value1 = values[1];
+                        context.SaveChanges();
+                    }
+                }
+            }
         }
+        
 
         /// <summary>
         /// Invokes the property changed event
