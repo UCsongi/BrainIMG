@@ -17,5 +17,6 @@
             </Button>
         </StackPanel>
         <Button Content="Import Data" Click="ImportButtonClick"></Button>
+        <Button Content="Display images" Click="DisplayButtonClick"></Button>
     </StackPanel>
 </Window>

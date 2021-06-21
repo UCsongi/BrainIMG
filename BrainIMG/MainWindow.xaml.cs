@@ -200,6 +200,13 @@ namespace BrainIMG
 
         }
 
+        public void DisplayButtonClick(object sender, RoutedEventArgs e)
+        {
+            DisplayWindow displayWindow = new DisplayWindow(FolderPath);
+            displayWindow.Show();
+
+        }
+
 
         /// <summary>
         /// Invokes the property changed event
