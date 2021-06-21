@@ -68,6 +68,15 @@
     <Compile Include="DisplayWindow.xaml.cs">
       <DependentUpon>DisplayWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DBConnection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>DBConnection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>DBConnection.tt</DependentUpon>
+    </Compile>
     <Compile Include="TestRecord.cs">
       <DependentUpon>DBConnection.tt</DependentUpon>
     </Compile>

@@ -14,11 +14,28 @@ namespace BrainIMG
     
     public partial class TestResult
     {
-        public int ID { get; set; }
-        public string Value1 { get; set; }
-        public Nullable<int> Value2 { get; set; }
-        public string Value3 { get; set; }
+        public long ID { get; set; }
         public int RecordID { get; set; }
+        public Nullable<int> AlgoID { get; set; }
+        public Nullable<int> PatientID { get; set; }
+        public Nullable<int> LearningSize { get; set; }
+        public string AlgoParam { get; set; }
+        public Nullable<int> FeatureCount { get; set; }
+        public Nullable<int> LearnDuration { get; set; }
+        public Nullable<int> TestDuration { get; set; }
+        public Nullable<int> TN { get; set; }
+        public Nullable<int> FP { get; set; }
+        public Nullable<int> FN { get; set; }
+        public Nullable<int> TP { get; set; }
+        public Nullable<double> Stat0 { get; set; }
+        public Nullable<double> Stat1 { get; set; }
+        public Nullable<double> Stat2 { get; set; }
+        public Nullable<double> Stat3 { get; set; }
+        public Nullable<double> DiceScore { get; set; }
+        public Nullable<double> Stat4 { get; set; }
+        public Nullable<double> Stat5 { get; set; }
+        public Nullable<double> Stat6 { get; set; }
+        public Nullable<double> Stat7 { get; set; }
     
         public virtual TestRecord TestRecord { get; set; }
     }

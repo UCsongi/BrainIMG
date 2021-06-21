@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Forms;
 using BrainIMG;
 
 namespace BrainIMG
@@ -22,33 +24,31 @@ namespace BrainIMG
         /// <summary>
         /// The ID of the test record
         /// </summary>
-        private int RecordID
+        public int RecordID
         {
             get => recordID;
 
             set
             {
                 recordID = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(RecordID));
             }
         }
 
         /// <summary>
         /// The ID of the test record
         /// </summary>
-        private string FolderPath
+        public string FolderPath
         {
             get => folderPath;
 
             set
             {
                 folderPath = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(FolderPath));
             }
         }
 
-        private TestRecord ImportedRecord
-        { get; set; } = new TestRecord() { TestDate = System.DateTime.Now};
         #endregion Properties
 
         #region Constructor
@@ -58,55 +58,154 @@ namespace BrainIMG
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
         #endregion Constructor
 
         #region Methods
-        #region EventHandlers
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Imports test data from a CSV File
+        /// </summary>
+        /// <param name="filePath">the path of the CSV file</param>
+        /// <returns>true if successful</returns>
+        private bool CsvImport()
         {
+            bool result = false;
             using (var context = new BrainVisualEntities())
             {
-                string filePath = "eval.csv";
-                ImportedRecord.FolderPath = filePath;
-                ImportedRecord.Metadata = "First import.";
-                ImportedRecord.TestResults = new List<TestResult>();
-                context.TestRecords.Add(ImportedRecord);
-                context.SaveChanges();
-                if (File.Exists(filePath))
+                OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+                dlg.InitialDirectory = FolderPath;
+                dlg.Filter = "CSV Files (*.csv)|*.csv";
+                dlg.RestoreDirectory = true;
+
+                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    StreamReader reader = new StreamReader(File.OpenRead(filePath));
-                    List<string> listA = new List<string>();
-
-                    while (!reader.EndOfStream)
+                    string selectedFileName = dlg.FileName;
+                    
+                    if (File.Exists(selectedFileName))
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+                        try
+                        {
+                            StreamReader reader = new StreamReader(File.OpenRead(selectedFileName));
+                            TestRecord ImportedRecord = new TestRecord() { TestDate = System.DateTime.Now };
+                            ImportedRecord.FolderPath = selectedFileName;
+                            ImportedRecord.TestResults = new List<TestResult>();
+                            context.TestRecords.Add(ImportedRecord);
+                            context.SaveChanges();
 
-                        TestResult ImportedResult = new TestResult();
-                        ImportedResult.RecordID = ImportedRecord.ID;
+                            while (!reader.EndOfStream)
+                            {
+                                var line = reader.ReadLine();
+                                var values = line.Split(',');
 
-                        context.TestResults.Add(ImportedResult);
-                        context.SaveChanges();
+                                TestResult ImportedResult = new TestResult();
+                                ImportedResult.RecordID = ImportedRecord.ID;
 
-                        ImportedResult.Value3 = values[0];
+                                long.TryParse(values[0], out long temp);
+                                ImportedResult.ID = temp;
 
-                        int.TryParse(values[2], out int temp);
-                        ImportedResult.Value2 = temp;
-                        ImportedResult.Value1 = values[1];
-                        context.SaveChanges();
+                                int.TryParse(values[1], out int temp1);
+                                ImportedResult.AlgoID = temp1;
+
+                                int.TryParse(values[2], out int temp2);
+                                ImportedResult.PatientID = temp2;
+
+                                int.TryParse(values[3], out int temp3);
+                                ImportedResult.LearningSize = temp3;
+
+                                ImportedResult.AlgoParam = values[4];
+
+                                int.TryParse(values[5], out int temp5);
+                                ImportedResult.FeatureCount = temp5;
+
+                                int.TryParse(values[6], out int temp6);
+                                ImportedResult.LearnDuration = temp6;
+
+                                int.TryParse(values[7], out int temp7);
+                                ImportedResult.TestDuration = temp7;
+
+                                int.TryParse(values[8], out int temp8);
+                                ImportedResult.TN = temp8;
+
+                                int.TryParse(values[9], out int temp9);
+                                ImportedResult.FP = temp9;
+
+                                int.TryParse(values[10], out int temp10);
+                                ImportedResult.FN = temp10;
+
+                                int.TryParse(values[11], out int temp11);
+                                ImportedResult.TP = temp11;
+
+                                float.TryParse(values[12], out float temp12);
+                                ImportedResult.Stat0 = temp12;
+
+                                float.TryParse(values[13], out float temp13);
+                                ImportedResult.Stat1 = temp13;
+
+                                float.TryParse(values[14], out float temp14);
+                                ImportedResult.Stat2 = temp14;
+
+                                float.TryParse(values[15], out float temp15);
+                                ImportedResult.Stat3 = temp15;
+
+                                int.TryParse(values[16], out int temp16);
+                                ImportedResult.DiceScore = temp16;
+
+                                float.TryParse(values[17], out float temp17);
+                                ImportedResult.Stat4 = temp17;
+
+                                float.TryParse(values[18], out float temp18);
+                                ImportedResult.Stat5 = temp18;
+
+                                float.TryParse(values[19], out float temp19);
+                                ImportedResult.Stat6 = temp19;
+
+                                float.TryParse(values[20], out float temp20);
+                                ImportedResult.Stat7 = temp20;
+
+                                context.TestResults.Add(ImportedResult);
+                            }
+
+                            context.SaveChanges();
+                            result = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
                     }
                 }
             }
+            return result;
         }
-        
+        #region EventHandlers
+
+        public void ImportButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(CsvImport())
+                System.Windows.MessageBox.Show("Successful Import!");
+            else
+                System.Windows.MessageBox.Show("Unsuccessful Import!");
+
+        }
+
+        public void FolderBrowseButtonClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
+
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                FolderPath = dlg.SelectedPath;
+            }
+
+        }
+
 
         /// <summary>
         /// Invokes the property changed event
         /// </summary>
         /// <param name="name">the name of the sender calling it</param>
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        private void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

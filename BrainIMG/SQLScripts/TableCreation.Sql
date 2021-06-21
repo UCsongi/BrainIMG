@@ -9,14 +9,32 @@ CREATE TABLE TestRecord (
 END;
 
 
+
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'TestResult')
 BEGIN
 CREATE TABLE TestResult (
-	ID INT PRIMARY KEY IDENTITY (1, 1),
+	ID BIGINT PRIMARY KEY IDENTITY (1, 1),
 	RecordID INT FOREIGN KEY REFERENCES TestRecord(ID) NOT NULL,
-	Value1 NVARCHAR,
-	Value2 INT,
-	Value3 NVARCHAR(MAX)
+	AlgoID INT,
+	PatientID INT,
+	LearningSize INT,
+	AlgoParam NVARCHAR(MAX),
+	FeatureCount INT,
+	LearnDuration INT,
+	TestDuration INT,
+	TN INT,
+	FP INT,
+	FN INT,
+	TP INT,
+	Stat0 FLOAT,
+	Stat1 FLOAT,
+	Stat2 FLOAT,
+	Stat3 FLOAT,
+	DiceScore FLOAT,
+	Stat4 FLOAT,
+	Stat5 FLOAT,
+	Stat6 FLOAT,
+	Stat7 FLOAT
 );
 END;
 
