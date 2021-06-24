@@ -4,7 +4,7 @@ BEGIN
 CREATE TABLE TestRecord (
 	ID INT PRIMARY KEY IDENTITY (1, 1),
 	FolderPath NVARCHAR (260) NOT NULL,
-	TestDate DATETIME NOT NULL,
+	TestDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	Metadata NVARCHAR(MAX));
 END;
 
@@ -19,7 +19,7 @@ CREATE TABLE TestResult (
 	PatientID INT,
 	LearningSize INT,
 	AlgoParam NVARCHAR(MAX),
-	FeatureCount INT,
+	FeatureCount INT DEFAULT 36,
 	LearnDuration INT,
 	TestDuration INT,
 	TN INT,

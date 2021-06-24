@@ -137,6 +137,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBConnection.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram.cd" />
     <None Include="DBConnection.edmx.diagram">
       <DependentUpon>DBConnection.edmx</DependentUpon>
     </None>
