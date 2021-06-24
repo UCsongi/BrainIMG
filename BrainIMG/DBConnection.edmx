@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="RecordID" Type="int" Nullable="false" />
           <Property Name="AlgoID" Type="int" />
           <Property Name="PatientID" Type="int" />
@@ -51,7 +51,7 @@
           <Property Name="Stat6" Type="float" />
           <Property Name="Stat7" Type="float" />
         </EntityType>
-        <Association Name="FK__TestResul__Recor__6477ECF3">
+        <Association Name="FK__TestResul__Recor__71D1E811">
           <End Role="TestRecord" Type="Self.TestRecord" Multiplicity="1" />
           <End Role="TestResult" Type="Self.TestResult" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +98,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestRecord" EntityType="Self.TestRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestResult" EntityType="Self.TestResult" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__TestResul__Recor__6477ECF3" Association="Self.FK__TestResul__Recor__6477ECF3">
+          <AssociationSet Name="FK__TestResul__Recor__71D1E811" Association="Self.FK__TestResul__Recor__71D1E811">
             <End Role="TestRecord" EntitySet="TestRecord" />
             <End Role="TestResult" EntitySet="TestResult" />
           </AssociationSet>
@@ -141,7 +141,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="TestResults" EntityType="BrainVisualModel.TestResult" />
-          <AssociationSet Name="FK__TestResul__Recor__6477ECF3" Association="BrainVisualModel.FK__TestResul__Recor__6477ECF3">
+          <AssociationSet Name="FK__TestResul__Recor__71D1E811" Association="BrainVisualModel.FK__TestResul__Recor__71D1E811">
             <End Role="TestRecord" EntitySet="TestRecords" />
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
@@ -154,7 +154,7 @@
           <Property Name="FolderPath" Type="String" Nullable="false" MaxLength="260" FixedLength="false" Unicode="true" />
           <Property Name="TestDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Metadata" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TestResults" Relationship="BrainVisualModel.FK__TestResul__Recor__6477ECF3" FromRole="TestRecord" ToRole="TestResult" />
+          <NavigationProperty Name="TestResults" Relationship="BrainVisualModel.FK__TestResul__Recor__71D1E811" FromRole="TestRecord" ToRole="TestResult" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -181,7 +181,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
           <Property Name="RecordID" Type="Int32" Nullable="false" />
           <Property Name="AlgoID" Type="Int32" />
           <Property Name="PatientID" Type="Int32" />
@@ -203,9 +203,9 @@
           <Property Name="Stat5" Type="Double" />
           <Property Name="Stat6" Type="Double" />
           <Property Name="Stat7" Type="Double" />
-          <NavigationProperty Name="TestRecord" Relationship="BrainVisualModel.FK__TestResul__Recor__6477ECF3" FromRole="TestResult" ToRole="TestRecord" />
+          <NavigationProperty Name="TestRecord" Relationship="BrainVisualModel.FK__TestResul__Recor__71D1E811" FromRole="TestResult" ToRole="TestRecord" />
         </EntityType>
-        <Association Name="FK__TestResul__Recor__6477ECF3">
+        <Association Name="FK__TestResul__Recor__71D1E811">
           <End Type="BrainVisualModel.TestRecord" Role="TestRecord" Multiplicity="1" />
           <End Type="BrainVisualModel.TestResult" Role="TestResult" Multiplicity="*" />
           <ReferentialConstraint>

@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="BrainVisualModel.TestRecord" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="BrainVisualModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="BrainVisualModel.TestResult" Width="1.5" PointX="3" PointY="7.875" />
-        <AssociationConnector Association="BrainVisualModel.FK__TestResul__Recor__6477ECF3" />
+        <AssociationConnector Association="BrainVisualModel.FK__TestResul__Recor__71D1E811" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

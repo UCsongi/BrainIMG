@@ -73,7 +73,7 @@ namespace BrainIMG
             bool result = false;
             using (var context = new BrainVisualEntities())
             {
-                OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog();
                 dlg.InitialDirectory = FolderPath;
                 dlg.Filter = "CSV Files (*.csv)|*.csv";
                 dlg.RestoreDirectory = true;
@@ -148,7 +148,7 @@ namespace BrainIMG
                                 float.TryParse(values[15], out float temp15);
                                 ImportedResult.Stat3 = temp15;
 
-                                int.TryParse(values[16], out int temp16);
+                                float.TryParse(values[16], out float temp16);
                                 ImportedResult.DiceScore = temp16;
 
                                 float.TryParse(values[17], out float temp17);

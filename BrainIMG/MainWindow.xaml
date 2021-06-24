@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="Auto">
+        Title="MainWindow" SizeToContent="WidthAndHeight" Height="200" Width="200">
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Background="LightBlue" Height="40">
+        <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
             <Label Margin="10,0,0,0" Height="23" Name="Label1">
                 Data location:
             </Label>
-            <Label Margin="5,0,0,0" Height="25" Name="FileNameLabel" Width="300" Content="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Margin="5,0,0,0" Height="25" Name="FileNameLabel" Width="Auto" Content="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Margin="5,0,0,0" Height="23" Name="BrowseButton" Width="75" Click="FolderBrowseButtonClick">
                 Browse
             </Button>

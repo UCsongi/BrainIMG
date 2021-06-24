@@ -5,28 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrainIMG"
         mc:Ignorable="d"
-        Title="DisplayWindow" Height="450" Width="800">
-    <DockPanel>
-        <StackPanel Orientation="Horizontal" Background="LightBlue" Height="40">
-            <Label Margin="10,0,0,0" Height="23" Name="Label1">
-                Current File:
-            </Label>
-            <Label Margin="5,0,0,0" Height="25" Name="FileNameLabel" Width="300" />
-            <Button Margin="5,0,0,0" Height="23" Name="BrowseButton" Width="75" Click="BrowseButton_Click">
-                Browse
-            </Button>
-        </StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" >
-            <Canvas Width="{Binding ActualWidth, ElementName=ImageViewer1}" Height="{Binding ActualHeight, ElementName=ImageViewer1}" >
-                <Canvas.Background>
-                    <VisualBrush  >
-                        <VisualBrush.Visual>
-                            <Image Name="ImageViewer1" Stretch="None" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Canvas.Background>
-            </Canvas>
-        </ScrollViewer>
+        WindowState="Maximized"
+        Title="DisplayWindow" Height="450" MinWidth="600">
+   
+    <Grid x:Name="LayoutRoot">
 
-    </DockPanel>
+        <StackPanel Orientation="Horizontal" Background="LightBlue" Name="DataPanel" Opacity="0.5" Height="35" Panel.ZIndex="1000" VerticalAlignment="Top">
+            <Button Margin="5,0,0,0" Height="30" Name="BrowseButton" VerticalAlignment="Center" Background="LightBlue" Width="100" Click="BrowseButton_Click" HorizontalAlignment="Left">
+                Change Folder
+            </Button>
+            <Label VerticalAlignment="Center" Height="30">Image name:</Label>
+            <ComboBox Margin="5,0,0,0" Height="30" Background="LightBlue" VerticalContentAlignment="Center" ItemsSource="{Binding Images}" SelectedItem="{Binding SelectedImageName, Mode=TwoWay}" Width="Auto">
+              
+            </ComboBox>
+            <Label VerticalAlignment="Center" Height="30">Patient:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PatientID, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Algorithm:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding AlgoID, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Parameter:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding AlgoParam, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Dice score:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding DiceScore, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30" ToolTip="True negatives">TN:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding TN, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30" ToolTip="False positives">FP:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding FP, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30" ToolTip="False negatives">FN:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding FN, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30" ToolTip="True positives">TP:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding TP, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" >
+                <Canvas Width="{Binding ActualWidth, ElementName=ImageViewer1}" Height="{Binding ActualHeight, ElementName=ImageViewer1}" >
+                    <Canvas.Background>
+                        <VisualBrush  >
+                            <VisualBrush.Visual>
+                                <Image Name="ImageViewer1" Stretch="None" SnapsToDevicePixels="True" UseLayoutRounding="True"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Canvas.Background>
+                </Canvas>
+            </ScrollViewer>
+
+        <Button Margin="5,130,17,0" Height="40" Name="RightBtn" Width="45" Click="RightButton_Click" Content=">" HorizontalAlignment="Right" Panel.ZIndex="1000" Opacity="0.3">
+        </Button>
+        <Button Margin="0,130,0,0" Height="40" Name="LeftBtn" Width="45" Click="LeftButton_Click" Content="&lt;" HorizontalAlignment="Left" Panel.ZIndex="1000" Opacity="0.3">
+        </Button>
+    </Grid>
 </Window>
