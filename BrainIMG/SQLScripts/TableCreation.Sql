@@ -26,15 +26,15 @@ CREATE TABLE TestResult (
 	FP INT,
 	FN INT,
 	TP INT,
-	Stat0 FLOAT,
-	Stat1 FLOAT,
-	Stat2 FLOAT,
-	Stat3 FLOAT,
+	NDS FLOAT,
+	NTPR FLOAT,
+	NTNR FLOAT,
+	NPPV FLOAT,
 	DiceScore FLOAT,
-	Stat4 FLOAT,
-	Stat5 FLOAT,
-	Stat6 FLOAT,
-	Stat7 FLOAT
+	PTPR FLOAT,
+	PTNR FLOAT,
+	PPPV FLOAT,
+	Correctness FLOAT
 );
 END;
 

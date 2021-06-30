@@ -5,18 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding}"
         mc:Ignorable="d"
+        Background="LightBlue"
         Title="MainWindow" SizeToContent="WidthAndHeight" Height="200" Width="200">
+    <Window.Resources>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#373737" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="OrangeRed" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        </Style>
+    </Window.Resources>
     <StackPanel>
         <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
-            <Label Margin="10,0,0,0" Height="23" Name="Label1">
+            <Label Margin="10,0,5,5" Height="23" Name="Label1">
                 Data location:
             </Label>
-            <Label Margin="5,0,0,0" Height="25" Name="FileNameLabel" Width="Auto" Content="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Margin="5,0,0,0" Height="23" Name="BrowseButton" Width="75" Click="FolderBrowseButtonClick">
+            <Label Margin="5" Height="25" Name="FileNameLabel" Width="Auto" Content="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Margin="5" Height="23" Name="BrowseButton" Width="75" Click="FolderBrowseButtonClick">
                 Browse
             </Button>
         </StackPanel>
-        <Button Content="Import Data" Click="ImportButtonClick"></Button>
-        <Button Content="Display images" Click="DisplayButtonClick"></Button>
+        <Button Margin="5" Content="Import Data" Click="ImportButtonClick"></Button>
+        <Button  Margin="5" Content="Display images" Click="DisplayButtonClick"></Button>
     </StackPanel>
 </Window>

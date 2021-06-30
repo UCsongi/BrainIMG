@@ -127,6 +127,53 @@ namespace BrainIMG
             }
         }
 
+        private string ptpr = string.Empty;
+        public string PTPR
+        {
+            get => ptpr;
+
+            set
+            {
+                ptpr = value;
+                OnPropertyChanged(nameof(PTPR));
+            }
+        }
+
+        private string ptnr = string.Empty;
+        public string PTNR
+        {
+            get => ptnr;
+
+            set
+            {
+                ptnr = value;
+                OnPropertyChanged(nameof(PTNR));
+            }
+        }
+
+        private string pppv = string.Empty;
+        public string PPPV
+        {
+            get => pppv;
+
+            set
+            {
+                pppv = value;
+                OnPropertyChanged(nameof(PPPV));
+            }
+        }
+
+        private string correctness = string.Empty;
+        public string Correctness
+        {
+            get => correctness;
+
+            set
+            {
+                correctness = value;
+                OnPropertyChanged(nameof(Correctness));
+            }
+        }
         private string algoID = string.Empty;
         public string AlgoID
         {
@@ -243,7 +290,8 @@ namespace BrainIMG
             using (var context = new BrainVisualEntities())
             {
                 TestResult temp = context.TestResults.FirstOrDefault(x => x.ID.ToString() == imageName.Substring(0, imageName.Length - 4));
-                DiceScore = (temp?.DiceScore * 100).ToString() + "%";
+                DiceScore = (temp?.DiceScore * 100).ToString();
+                DiceScore = DiceScore.Substring(0, 7) + "%";
                 TN = temp?.TN.ToString();
                 FP = temp?.FP.ToString();
                 FN = temp?.FN.ToString();
@@ -251,6 +299,14 @@ namespace BrainIMG
                 AlgoID = temp?.AlgoID.ToString();
                 PatientID = temp?.PatientID.ToString();
                 AlgoParam = temp?.AlgoParam.ToString();
+                PTPR = (temp?.PTPR * 100).ToString();
+                PTPR = PTPR.Substring(0, 7) + "%";
+                PTNR = (temp?.PTNR * 100).ToString();
+                PTNR = PTNR.Substring(0, 7) + "%";
+                PPPV = (temp?.PPPV * 100).ToString();
+                PPPV = PPPV.Substring(0, 7) + "%";
+                Correctness = (temp?.Correctness * 100).ToString();
+                Correctness = Correctness.Substring(0, 7) + "%";
             }
         }
         #endregion Methods

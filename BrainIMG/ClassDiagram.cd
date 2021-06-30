@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="BrainIMG.DisplayWindow">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>ARARAUAEAQBEgAAANIBAAGAQkAQAAXAAABJwBAAAEAA=</HashCode>
+      <HashCode>ARARAVAEAQBEgAAANJBAAHAQkAQAAXAAABJ4BAAAGAA=</HashCode>
       <FileName>DisplayWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BrainIMG.MainWindow">
-    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Position X="5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAACAIACAASAAgCAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
@@ -17,16 +17,16 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BrainIMG.TestRecord">
-    <Position X="7" Y="0.75" Width="1.5" />
+    <Position X="10.5" Y="1.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAhAAAAAAABCAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>TestRecord.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BrainIMG.TestResult">
-    <Position X="9" Y="0.75" Width="1.5" />
+    <Position X="13.5" Y="1.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>IABBAAggAQAggACAAAAAQCAQAAQAARCAAAAwAIEAAAA=</HashCode>
+      <HashCode>IAABABggAQAAgAGAABAAAAAQAAQAAQCAQAA0AAAACAA=</HashCode>
       <FileName>TestResult.cs</FileName>
     </TypeIdentifier>
   </Class>

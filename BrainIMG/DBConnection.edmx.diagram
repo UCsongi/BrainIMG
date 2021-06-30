@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="477f6b2df03b498cb8c069575b023686" Name="Diagram1" >
         <EntityTypeShape EntityType="BrainVisualModel.TestRecord" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BrainVisualModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="BrainVisualModel.TestResult" Width="1.5" PointX="3" PointY="7.875" />
         <AssociationConnector Association="BrainVisualModel.FK__TestResul__Recor__71D1E811" />
-        <EntityTypeShape EntityType="BrainVisualModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

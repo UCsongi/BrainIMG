@@ -27,15 +27,15 @@ namespace BrainIMG
         public Nullable<int> FP { get; set; }
         public Nullable<int> FN { get; set; }
         public Nullable<int> TP { get; set; }
-        public Nullable<double> Stat0 { get; set; }
-        public Nullable<double> Stat1 { get; set; }
-        public Nullable<double> Stat2 { get; set; }
-        public Nullable<double> Stat3 { get; set; }
+        public Nullable<double> NDS { get; set; }
+        public Nullable<double> NTPR { get; set; }
+        public Nullable<double> NTNR { get; set; }
+        public Nullable<double> NPPV { get; set; }
         public Nullable<double> DiceScore { get; set; }
-        public Nullable<double> Stat4 { get; set; }
-        public Nullable<double> Stat5 { get; set; }
-        public Nullable<double> Stat6 { get; set; }
-        public Nullable<double> Stat7 { get; set; }
+        public Nullable<double> PTPR { get; set; }
+        public Nullable<double> PTNR { get; set; }
+        public Nullable<double> PPPV { get; set; }
+        public Nullable<double> Correctness { get; set; }
     
         public virtual TestRecord TestRecord { get; set; }
     }

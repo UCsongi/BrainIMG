@@ -41,15 +41,15 @@
           <Property Name="FP" Type="int" />
           <Property Name="FN" Type="int" />
           <Property Name="TP" Type="int" />
-          <Property Name="Stat0" Type="float" />
-          <Property Name="Stat1" Type="float" />
-          <Property Name="Stat2" Type="float" />
-          <Property Name="Stat3" Type="float" />
+          <Property Name="NDS" Type="float" />
+          <Property Name="NTPR" Type="float" />
+          <Property Name="NTNR" Type="float" />
+          <Property Name="NPPV" Type="float" />
           <Property Name="DiceScore" Type="float" />
-          <Property Name="Stat4" Type="float" />
-          <Property Name="Stat5" Type="float" />
-          <Property Name="Stat6" Type="float" />
-          <Property Name="Stat7" Type="float" />
+          <Property Name="PTPR" Type="float" />
+          <Property Name="PTNR" Type="float" />
+          <Property Name="PPPV" Type="float" />
+          <Property Name="Correctness" Type="float" />
         </EntityType>
         <Association Name="FK__TestResul__Recor__71D1E811">
           <End Role="TestRecord" Type="Self.TestRecord" Multiplicity="1" />
@@ -139,12 +139,12 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="sysdiagrams" EntityType="BrainVisualModel.sysdiagram" />
           <EntitySet Name="TestResults" EntityType="BrainVisualModel.TestResult" />
           <AssociationSet Name="FK__TestResul__Recor__71D1E811" Association="BrainVisualModel.FK__TestResul__Recor__71D1E811">
             <End Role="TestRecord" EntitySet="TestRecords" />
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="BrainVisualModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="TestRecord">
           <Key>
@@ -167,6 +167,16 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TestResult">
           <Key>
             <PropertyRef Name="ID" />
@@ -184,15 +194,15 @@
           <Property Name="FP" Type="Int32" />
           <Property Name="FN" Type="Int32" />
           <Property Name="TP" Type="Int32" />
-          <Property Name="Stat0" Type="Double" />
-          <Property Name="Stat1" Type="Double" />
-          <Property Name="Stat2" Type="Double" />
-          <Property Name="Stat3" Type="Double" />
+          <Property Name="NDS" Type="Double" />
+          <Property Name="NTPR" Type="Double" />
+          <Property Name="NTNR" Type="Double" />
+          <Property Name="NPPV" Type="Double" />
           <Property Name="DiceScore" Type="Double" />
-          <Property Name="Stat4" Type="Double" />
-          <Property Name="Stat5" Type="Double" />
-          <Property Name="Stat6" Type="Double" />
-          <Property Name="Stat7" Type="Double" />
+          <Property Name="PTPR" Type="Double" />
+          <Property Name="PTNR" Type="Double" />
+          <Property Name="PPPV" Type="Double" />
+          <Property Name="Correctness" Type="Double" />
           <NavigationProperty Name="TestRecord" Relationship="BrainVisualModel.FK__TestResul__Recor__71D1E811" FromRole="TestResult" ToRole="TestRecord" />
         </EntityType>
         <Association Name="FK__TestResul__Recor__71D1E811">
@@ -207,16 +217,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -257,18 +257,29 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BrainVisualModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BrainVisualModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BrainVisualModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TestResults">
             <EntityTypeMapping TypeName="BrainVisualModel.TestResult">
               <MappingFragment StoreEntitySet="TestResult">
-                <ScalarProperty Name="Stat7" ColumnName="Stat7" />
-                <ScalarProperty Name="Stat6" ColumnName="Stat6" />
-                <ScalarProperty Name="Stat5" ColumnName="Stat5" />
-                <ScalarProperty Name="Stat4" ColumnName="Stat4" />
+                <ScalarProperty Name="Correctness" ColumnName="Correctness" />
+                <ScalarProperty Name="PPPV" ColumnName="PPPV" />
+                <ScalarProperty Name="PTNR" ColumnName="PTNR" />
+                <ScalarProperty Name="PTPR" ColumnName="PTPR" />
                 <ScalarProperty Name="DiceScore" ColumnName="DiceScore" />
-                <ScalarProperty Name="Stat3" ColumnName="Stat3" />
-                <ScalarProperty Name="Stat2" ColumnName="Stat2" />
-                <ScalarProperty Name="Stat1" ColumnName="Stat1" />
-                <ScalarProperty Name="Stat0" ColumnName="Stat0" />
+                <ScalarProperty Name="NPPV" ColumnName="NPPV" />
+                <ScalarProperty Name="NTNR" ColumnName="NTNR" />
+                <ScalarProperty Name="NTPR" ColumnName="NTPR" />
+                <ScalarProperty Name="NDS" ColumnName="NDS" />
                 <ScalarProperty Name="TP" ColumnName="TP" />
                 <ScalarProperty Name="FN" ColumnName="FN" />
                 <ScalarProperty Name="FP" ColumnName="FP" />
@@ -282,17 +293,6 @@
                 <ScalarProperty Name="AlgoID" ColumnName="AlgoID" />
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="BrainVisualModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

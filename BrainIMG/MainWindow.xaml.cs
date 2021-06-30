@@ -137,31 +137,31 @@ namespace BrainIMG
                                 ImportedResult.TP = temp11;
 
                                 float.TryParse(values[12], out float temp12);
-                                ImportedResult.Stat0 = temp12;
+                                ImportedResult.NDS = temp12;
 
                                 float.TryParse(values[13], out float temp13);
-                                ImportedResult.Stat1 = temp13;
+                                ImportedResult.NTPR = temp13;
 
                                 float.TryParse(values[14], out float temp14);
-                                ImportedResult.Stat2 = temp14;
+                                ImportedResult.NTNR = temp14;
 
                                 float.TryParse(values[15], out float temp15);
-                                ImportedResult.Stat3 = temp15;
+                                ImportedResult.NPPV = temp15;
 
                                 float.TryParse(values[16], out float temp16);
                                 ImportedResult.DiceScore = temp16;
 
                                 float.TryParse(values[17], out float temp17);
-                                ImportedResult.Stat4 = temp17;
+                                ImportedResult.PTPR = temp17;
 
                                 float.TryParse(values[18], out float temp18);
-                                ImportedResult.Stat5 = temp18;
+                                ImportedResult.PTNR = temp18;
 
                                 float.TryParse(values[19], out float temp19);
-                                ImportedResult.Stat6 = temp19;
+                                ImportedResult.PPPV = temp19;
 
                                 float.TryParse(values[20], out float temp20);
-                                ImportedResult.Stat7 = temp20;
+                                ImportedResult.Correctness = temp20;
 
                                 context.TestResults.Add(ImportedResult);
                             }

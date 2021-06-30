@@ -6,12 +6,44 @@
         xmlns:local="clr-namespace:BrainIMG"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="DisplayWindow" Height="450" MinWidth="600">
-   
-    <Grid x:Name="LayoutRoot">
+        Title="DisplayWindow" Height="450" MinWidth="400">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="DarkGray" />
+            <Setter Property="Foreground" Value="Wheat" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
 
-        <StackPanel Orientation="Horizontal" Background="LightBlue" Name="DataPanel" Opacity="0.5" Height="35" Panel.ZIndex="1000" VerticalAlignment="Top">
-            <Button Margin="5,0,0,0" Height="30" Name="BrowseButton" VerticalAlignment="Center" Background="LightBlue" Width="100" Click="BrowseButton_Click" HorizontalAlignment="Left">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="LayoutRoot">
+        <StackPanel Panel.ZIndex="1000">
+            <StackPanel Orientation="Horizontal" Background="LightBlue" Name="DataPanel" Opacity="0.5" Height="35" Panel.ZIndex="1000" VerticalAlignment="Top">
+            
+            <Button Margin="0,0,0,0" Height="30" Name="BrowseButton" VerticalAlignment="Center" Foreground="Black" FontSize="12" Background="LightCyan" Width="100" Click="BrowseButton_Click" HorizontalAlignment="Left">
                 Change Folder
             </Button>
             <Label VerticalAlignment="Center" Height="30">Image name:</Label>
@@ -25,7 +57,7 @@
             <Label VerticalAlignment="Center" Height="30">Parameter:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding AlgoParam, UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Height="30">Dice score:</Label>
-            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding DiceScore, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding DiceScore, UpdateSourceTrigger=PropertyChanged}" />
             <Label VerticalAlignment="Center" Height="30" ToolTip="True negatives">TN:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding TN, UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Height="30" ToolTip="False positives">FP:</Label>
@@ -34,6 +66,35 @@
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding FN, UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Height="30" ToolTip="True positives">TP:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding TP, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Sensitivity:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PTPR, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Specificity:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PTNR, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Precision:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PPPV, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label VerticalAlignment="Center" Height="30">Correctness:</Label>
+            <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding Correctness, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue" Name="LegendPanel" Opacity="0.5" Height="25" Panel.ZIndex="1000" VerticalAlignment="Top">
+                <Rectangle Margin="5,0,0,0" Width="5" Height="5" Opacity="1" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#0100fe" />
+                </Rectangle.Fill>
+            </Rectangle>
+                <Label Content="False positive" VerticalAlignment="Center"/>
+                <Rectangle Width="5" Height="5" Opacity="1" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#fe0001" />
+                </Rectangle.Fill>
+            </Rectangle>
+                <Label Content="False negative" VerticalAlignment="Center"/>
+                <Rectangle Width="5" Height="5" Opacity="1" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#01fe00" />
+                </Rectangle.Fill>
+            </Rectangle>
+                <Label Content="True positive" VerticalAlignment="Center"/>
+            </StackPanel> 
         </StackPanel>
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" >
                 <Canvas Width="{Binding ActualWidth, ElementName=ImageViewer1}" Height="{Binding ActualHeight, ElementName=ImageViewer1}" >
