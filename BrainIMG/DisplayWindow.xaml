@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BrainIMG"
         mc:Ignorable="d"
         WindowState="Maximized"
+        Background="Black"
         Title="DisplayWindow" Height="450" MinWidth="400">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -96,7 +97,7 @@
                 <Label Content="True positive" VerticalAlignment="Center"/>
             </StackPanel> 
         </StackPanel>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" >
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
                 <Canvas Width="{Binding ActualWidth, ElementName=ImageViewer1}" Height="{Binding ActualHeight, ElementName=ImageViewer1}" >
                     <Canvas.Background>
                         <VisualBrush  >

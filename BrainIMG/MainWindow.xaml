@@ -6,7 +6,7 @@
         DataContext="{Binding}"
         mc:Ignorable="d"
         Background="LightBlue"
-        Title="MainWindow" SizeToContent="WidthAndHeight" Height="200" Width="200">
+        Title="BrainIMG" SizeToContent="Width" Height="150" Width="250">
     <Window.Resources>
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="#373737" />
@@ -40,7 +40,7 @@
         </Style>
     </Window.Resources>
     <StackPanel>
-        <StackPanel Orientation="Horizontal" Height="40" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Height="40" Margin="0,5,0,0" HorizontalAlignment="Center">
             <Label Margin="10,0,5,5" Height="23" Name="Label1">
                 Data location:
             </Label>

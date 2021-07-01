@@ -291,7 +291,7 @@ namespace BrainIMG
             {
                 TestResult temp = context.TestResults.FirstOrDefault(x => x.ID.ToString() == imageName.Substring(0, imageName.Length - 4));
                 DiceScore = (temp?.DiceScore * 100).ToString();
-                DiceScore = DiceScore.Substring(0, 7) + "%";
+                DiceScore = DiceScore.Length > 7 ? DiceScore.Substring(0, 7) + "%" : DiceScore;
                 TN = temp?.TN.ToString();
                 FP = temp?.FP.ToString();
                 FN = temp?.FN.ToString();
@@ -300,13 +300,13 @@ namespace BrainIMG
                 PatientID = temp?.PatientID.ToString();
                 AlgoParam = temp?.AlgoParam.ToString();
                 PTPR = (temp?.PTPR * 100).ToString();
-                PTPR = PTPR.Substring(0, 7) + "%";
+                PTPR = PTPR.Length > 7 ? PTPR.Substring(0, 7) + "%" : PTPR;
                 PTNR = (temp?.PTNR * 100).ToString();
-                PTNR = PTNR.Substring(0, 7) + "%";
+                PTNR = PTNR.Length > 7 ? PTNR.Substring(0, 7) + "%" : PTNR;
                 PPPV = (temp?.PPPV * 100).ToString();
-                PPPV = PPPV.Substring(0, 7) + "%";
+                PPPV = PPPV.Length > 7 ? PPPV.Substring(0, 7) + "%" : PPPV;
                 Correctness = (temp?.Correctness * 100).ToString();
-                Correctness = Correctness.Substring(0, 7) + "%";
+                Correctness = Correctness.Length > 7 ? Correctness.Substring(0, 7) + "%" : Correctness;
             }
         }
         #endregion Methods
