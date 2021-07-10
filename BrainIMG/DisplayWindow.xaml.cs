@@ -19,7 +19,13 @@ namespace BrainIMG
         int ImgIndex = 0;
         public static readonly List<string> imageExtensions = new List<string> { ".JPG", ".JPE", ".BMP", ".GIF", ".PNG" };
         private string[] imagePaths;
+        private string[] originalImagePaths;
+        private string inputFolderPath = "";
         private ObservableCollection<string> images = new ObservableCollection<string>();
+        private ObservableCollection<string> originalImages = new ObservableCollection<string>();
+        private ObservableCollection<string> values = new ObservableCollection<string>();
+        private ObservableCollection<string> properties = new ObservableCollection<string>();
+        private ObservableCollection<string> inputImageTypes = new ObservableCollection<string>() { "T1", "T2", "FLAIR", "TIC", "GT" };
 
         /// <summary>
         /// The folder path
@@ -48,6 +54,42 @@ namespace BrainIMG
                 OnPropertyChanged(nameof(Images));
             }
         }
+        public ObservableCollection<string> Values
+        {
+            get
+            {
+                return values;
+            }
+            set
+            {
+                values = value;
+                OnPropertyChanged(nameof(Values));
+            }
+        }
+        public ObservableCollection<string> Properties
+        {
+            get
+            {
+                return properties;
+            }
+            set
+            {
+                properties = value;
+                OnPropertyChanged(nameof(Properties));
+            }
+        }
+        public ObservableCollection<string> InputImageTypes
+        {
+            get
+            {
+                return inputImageTypes;
+            }
+            set
+            {
+                inputImageTypes = value;
+                OnPropertyChanged(nameof(InputImageTypes));
+            }
+        }
 
 
         private string selectedImageName = string.Empty;
@@ -66,6 +108,227 @@ namespace BrainIMG
                 }
             }
         }
+
+        private string selectedInputName = string.Empty;
+        public string SelectedInputName
+        {
+            get => selectedInputName;
+
+            set
+            {
+                if (selectedInputName != value)
+                {
+                    selectedInputName = value;
+                    OnPropertyChanged(nameof(SelectedInputName));
+                    using (var context = new BrainVisualEntities())
+                    {
+                        if (string.IsNullOrEmpty(inputFolderPath))
+                        {
+                            FolderBrowserDialog dlg = new System.Windows.Forms.FolderBrowserDialog();
+                            dlg.SelectedPath = System.IO.Directory.GetParent(FolderPath)?.FullName;
+                            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            {
+                                inputFolderPath = dlg.SelectedPath;
+
+                                string filename = "pat";
+                                switch (value)
+                                {
+                                    case "T1":
+                                        PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                        int.TryParse(patientID, out int temp);
+                                        if (temp < 10)
+                                            filename = filename + "0" + PatientID + "-ch0";
+                                        else
+                                            filename = filename + PatientID + "-ch0";
+                                        break;
+                                    case "T2":
+                                        PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                        int.TryParse(patientID, out int temp1);
+                                        if (temp1 < 10)
+                                            filename = filename + "0" + PatientID + "-ch1";
+                                        else
+                                            filename = filename + PatientID + "-ch1";
+                                        break;
+                                    case "FLAIR":
+                                        PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                        int.TryParse(patientID, out int temp2);
+                                        if (temp2 < 10)
+                                            filename = filename + "0" + PatientID + "-ch2";
+                                        else
+                                            filename = filename + PatientID + "-ch2"; break;
+                                    case "TIC":
+                                        PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                        int.TryParse(patientID, out int temp3);
+                                        if (temp3 < 10)
+                                            filename = filename + "0" + PatientID + "-ch3";
+                                        else
+                                            filename = filename + PatientID + "-ch3"; 
+                                        break;
+                                    case "GT":
+                                        PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                        int.TryParse(patientID, out int temp4);
+                                        if (temp4 < 10)
+                                            filename = filename + "0" + PatientID + "-gt";
+                                        else
+                                            filename = filename + PatientID + "-gt";
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                DisplayImage(inputFolderPath + "\\" + filename + ".png");
+                            }
+                        }
+                        else
+                        {
+                            string filename = "pat";
+                            switch (value)
+                            {
+                                case "T1":
+                                    PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                    int.TryParse(patientID, out int temp);
+                                    if (temp < 10)
+                                        filename = filename + "0" + PatientID + "-ch0";
+                                    else
+                                        filename = filename + PatientID + "-ch0";
+                                    break;
+                                case "T2":
+                                    PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                    int.TryParse(patientID, out int temp1);
+                                    if (temp1 < 10)
+                                        filename = filename + "0" + PatientID + "-ch1";
+                                    else
+                                        filename = filename + PatientID + "-ch1";
+                                    break;
+                                case "FLAIR":
+                                    PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                    int.TryParse(patientID, out int temp2);
+                                    if (temp2 < 10)
+                                        filename = filename + "0" + PatientID + "-ch2";
+                                    else
+                                        filename = filename + PatientID + "-ch2"; break;
+                                case "TIC":
+                                    PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                    int.TryParse(patientID, out int temp3);
+                                    if (temp3 < 10)
+                                        filename = filename + "0" + PatientID + "-ch3";
+                                    else
+                                        filename = filename + PatientID + "-ch3";
+                                    break;
+                                case "GT":
+                                    PatientID = context.TestResults.FirstOrDefault(x => x.ID + ".png" == SelectedImageName).PatientID.ToString();
+                                    int.TryParse(patientID, out int temp4);
+                                    if (temp4 < 10)
+                                        filename = filename + "0" + PatientID + "-gt";
+                                    else
+                                        filename = filename + PatientID + "-gt";
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            DisplayImage(inputFolderPath + "\\" + filename + ".png");
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private string selectedPropertyName = string.Empty;
+        public string SelectedPropertyName
+        {
+            get => selectedPropertyName;
+
+            set { 
+                 
+                
+                if (selectedPropertyName != value)
+                {
+                    selectedPropertyName = value;
+                    OnPropertyChanged(nameof(SelectedPropertyName));
+
+                    using (var context = new BrainVisualEntities())
+                    {
+                        switch (value)
+                        {
+                            case "AlgoID":
+                                List<string> temp = new List<string>();
+                                Values = new ObservableCollection<string>(context.TestResults.Select(x => x.AlgoID.ToString()).Distinct().ToList());
+                                break;
+                            case "AlgoParam":
+                                List<string> temp1 = new List<string>();
+                                Values = new ObservableCollection<string>(context.TestResults.Select(x => x.AlgoParam.ToString()).Distinct().ToList());
+                                break;
+                            case "FeatureCount":
+                                List<string> temp2 = new List<string>();
+                                Values = new ObservableCollection<string>(context.TestResults.Select(x => x.FeatureCount.ToString()).Distinct().ToList());
+                                break;
+                            case "LearningSize":
+                                List<string> temp3 = new List<string>();
+                                Values = new ObservableCollection<string>(context.TestResults.Select(x => x.LearningSize.ToString()).Distinct().ToList());
+                                break;
+                            case "PatientID":
+                                List<string> temp4 = new List<string>();
+                                Values = new ObservableCollection<string>(context.TestResults.Select(x => x.PatientID.ToString()).Distinct().ToList());
+                                break;
+                            default:
+                                break;
+                        } }
+                }
+            }
+        }
+
+
+        private string selectedValueName = string.Empty;
+        public string SelectedValueName
+        {
+            get => selectedValueName;
+
+            set
+            {
+                if (selectedValueName != value)
+                {
+                    selectedValueName = value;
+                    OnPropertyChanged(nameof(SelectedValueName));
+                    using (var context = new BrainVisualEntities())
+                    {
+                        ObservableCollection<string> tempImages = new ObservableCollection<string>();
+                        foreach(string name in originalImages)
+                        {
+                            switch (SelectedPropertyName)
+                            {
+                                case "AlgoID":
+                                    if (context.TestResults.FirstOrDefault(x => x.ID + ".png" == name).AlgoID.ToString() == value)
+                                        tempImages.Add(name);
+                                    break;
+                                case "AlgoParam":
+                                    if (context.TestResults.FirstOrDefault(x => x.ID + ".png" == name).AlgoParam.ToString() == value)
+                                        tempImages.Add(name); 
+                                    break;
+                                case "FeatureCount":
+                                    if (context.TestResults.FirstOrDefault(x => x.ID + ".png" == name).FeatureCount.ToString() == value)
+                                        tempImages.Add(name);
+                                    break;
+                                case "LearningSize":
+                                    if (context.TestResults.FirstOrDefault(x => x.ID + ".png" == name).LearningSize.ToString() == value)
+                                        tempImages.Add(name);
+                                    break;
+                                case "PatientID":
+                                    if (context.TestResults.FirstOrDefault(x => x.ID + ".png" == name).PatientID.ToString() == value)
+                                        tempImages.Add(name);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        Images = tempImages;
+                        imagePaths = tempImages.Select(x => FolderPath + "\\" + x).ToArray();
+                    }
+                }
+            }
+        }
+
 
         private string diceScore = string.Empty;
         public string DiceScore
@@ -252,8 +515,9 @@ namespace BrainIMG
             {
 
                 List<string> filesFound = GetFilesFrom(FolderPath);
-                Images = new ObservableCollection<string>(filesFound.Select(f => Path.GetFileName(f)));
+                originalImages = Images = new ObservableCollection<string>(filesFound.Select(f => Path.GetFileName(f)));
                 imagePaths = filesFound?.ToArray();
+                originalImagePaths = filesFound?.ToArray(); 
 
                 if (imagePaths.Length > 0)
                 {
@@ -289,6 +553,14 @@ namespace BrainIMG
         {
             using (var context = new BrainVisualEntities())
             {
+                Properties = new ObservableCollection<string>()
+                {
+                    nameof(TestResult.AlgoID),
+                    nameof(TestResult.AlgoParam),
+                     nameof(TestResult.FeatureCount),
+                      nameof(TestResult.LearningSize),
+                       nameof(TestResult.PatientID)
+                };
                 TestResult temp = context.TestResults.FirstOrDefault(x => x.ID.ToString() == imageName.Substring(0, imageName.Length - 4));
                 DiceScore = (temp?.DiceScore * 100).ToString();
                 DiceScore = DiceScore.Length > 7 ? DiceScore.Substring(0, 7) + "%" : DiceScore;
@@ -326,6 +598,7 @@ namespace BrainIMG
                     ChangeFolderPath(dlg.SelectedPath);
             }
         }
+
 
         public void RightButton_Click(object sender, RoutedEventArgs e)
         {

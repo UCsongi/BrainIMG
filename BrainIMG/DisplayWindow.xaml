@@ -51,7 +51,14 @@
             <ComboBox Margin="5,0,0,0" Height="30" Background="LightBlue" VerticalContentAlignment="Center" ItemsSource="{Binding Images}" SelectedItem="{Binding SelectedImageName, Mode=TwoWay}" Width="Auto">
               
             </ComboBox>
-            <Label VerticalAlignment="Center" Height="30">Patient:</Label>
+                <Label VerticalAlignment="Center" Height="30">Criteria:</Label>
+                <ComboBox Margin="5,0,0,0" Height="30" Background="LightBlue" VerticalContentAlignment="Center" ItemsSource="{Binding Properties}" SelectedItem="{Binding SelectedPropertyName, Mode=TwoWay}" Width="Auto">
+
+                </ComboBox>
+                <ComboBox Margin="5,0,0,0" Height="30" Background="LightBlue" VerticalContentAlignment="Center" ItemsSource="{Binding Values}" SelectedItem="{Binding SelectedValueName, Mode=TwoWay}" Width="Auto">
+
+                </ComboBox>
+                <Label VerticalAlignment="Center" Height="30">Patient:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PatientID, UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Height="30">Algorithm:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding AlgoID, UpdateSourceTrigger=PropertyChanged}"/>
@@ -75,8 +82,10 @@
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding PPPV, UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Height="30">Correctness:</Label>
             <Label VerticalAlignment="Center" Margin="5,0,0,0" Height="30" Width="Auto" Content="{Binding Correctness, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-            <StackPanel Orientation="Horizontal" Background="LightBlue" Name="LegendPanel" Opacity="0.5" Height="25" Panel.ZIndex="1000" VerticalAlignment="Top">
+
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue" Name="LegendPanel" Opacity="0.5" Height="35" Panel.ZIndex="1000" VerticalAlignment="Top">
                 <Rectangle Margin="5,0,0,0" Width="5" Height="5" Opacity="1" VerticalAlignment="Center">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="#0100fe" />
@@ -95,9 +104,18 @@
                 </Rectangle.Fill>
             </Rectangle>
                 <Label Content="True positive" VerticalAlignment="Center"/>
-            </StackPanel> 
+                
+                <Label VerticalAlignment="Bottom" Height="30">Input images</Label>
+                <ComboBox Margin="5,0,0,0" Height="30" Background="LightBlue" VerticalContentAlignment="Center" ItemsSource="{Binding InputImageTypes}" 
+                          SelectedItem="{Binding SelectedInputName, Mode=TwoWay}"
+                          Width="Auto">
+
+                </ComboBox>
+            </StackPanel>
+
+           
         </StackPanel>
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" >
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
                 <Canvas Width="{Binding ActualWidth, ElementName=ImageViewer1}" Height="{Binding ActualHeight, ElementName=ImageViewer1}" >
                     <Canvas.Background>
                         <VisualBrush  >
